@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>AutoMax GT - Autos premium en Guatemala</title>
+<meta name="description" content="AutoMax GT ofrece vehículos premium en Guatemala con financiamiento flexible y atención personalizada.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #eef2f7 0%, #d7e1ec 100%);
+    color: #2b3a4a;
+    line-height: 1.5;
+}
+
+/* MARQUESINA */
+.marquesina {
+    background: linear-gradient(90deg, #0e1f3a 0%, #152b4d 100%);
+    color: #ffcf47;
+    padding: 14px 10px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+}
+
+/* MENÚ */
+nav {
+    background: rgba(35, 33, 56, 0.795);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+nav a {
+    color: #fafafa;
+    padding: 12px 18px;
+    text-decoration: none;
+    border-radius: 999px;
+    transition: transform 0.25s ease, background 0.25s ease;
+    font-weight: 600;
+}
+
+nav a:hover,
+nav a:focus {
+    background: rgba(255, 188, 45, 0.95);
+    color: #1f2937;
+    transform: translateY(-2px);
+}
+
+/* SECCIONES */
+section {
+    padding: 50px 40px;
+    display: none;
+    max-width: 1100px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.92);
+    border-radius: 22px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(8px);
+}
+
+.active {
+    display: block;
+}
+
+section h1,
+section h2 {
+    color: #0f172a;
+    margin-bottom: 18px;
+}
+
+section h2 {
+    font-size: 32px;
+    border-bottom: 3px solid #fbbf24;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+section h1 {
+    font-size: 44px;
+}
+
+.hero-text h1 {
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #2563eb 0%, #0f172a 65%, #047857 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+}
+
+.hero-text h1 span {
+    display: block;
+    color: #0f172a;
+}
+
+section p {
+    font-size: 17px;
+    color: #334155;
+    margin-bottom: 18px;
+}
+
+/* TARJETAS */
+.card {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    padding: 22px;
+    margin: 18px;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+    display: inline-block;
+    width: 260px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.16);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 16px;
+}
+
+.card h3 {
+    color: #0f172a;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.product-meta {
+    margin: 0 0 14px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.card-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.card-buttons button {
+    flex: 1 1 120px;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.card-buttons button.comprar {
+    background: #047857;
+    color: #f8fafc;
+}
+
+.card-buttons button.cotizar {
+    background: #2563eb;
+    color: #f8fafc;
+}
+
+.card-buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.15);
+}
+
+/* SLIDER */
+.slider {
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.14);
+    margin-bottom: 20px;
+    min-height: 360px;
+}
+
+.hero-media {
+    flex: 1;
+    min-width: 340px;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    background: #cbd5e1;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.slider-dot.active {
+    background: #2563eb;
+    transform: scale(1.2);
+}
+
+.hero {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.hero-text {
+    max-width: 560px;
+}
+
+.hero-text .eyebrow {
+    display: inline-block;
+    margin-bottom: 16px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(37, 99, 235, 0.12);
+    color: #1d4ed8;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    color: #334155;
+    margin-bottom: 24px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.hero-buttons a {
+    display: inline-block;
+    padding: 14px 26px;
+    border-radius: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #ffffff;
+    background: #2563eb;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.hero-buttons a.secondary {
+    background: #047857;
+}
+
+.hero-buttons a:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+}
+
+.hero-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.hero-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-radius: 14px;
+    background: #0f172a;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.hero-social a.whatsapp {
+    background: #25D366;
+}
+
+.hero-social a.facebook {
+    background: #1877F2;
+}
+
+.hero-social a:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+}
+
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.feature-item {
+    background: rgba(255, 255, 255, 0.90);
+    padding: 18px 16px;
+    border-radius: 18px;
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+}
+
+.feature-item h3 {
+    margin-bottom: 8px;
+    font-size: 17px;
+    color: #0f172a;
+}
+
+.feature-item p {
+    margin: 0;
+    font-size: 15px;
+    color: #475569;
+}
+
+.clientes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+}
+
+.cliente-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+    text-align: center;
+}
+
+.cliente-card h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #0f172a;
+}
+
+.cliente-card p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.testimonial {
+    margin-top: 30px;
+    padding: 26px 28px;
+    border-radius: 22px;
+    background: rgba(37, 99, 235, 0.08);
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+}
+
+.testimonial p {
+    font-size: 17px;
+    color: #0f172a;
+    margin-bottom: 14px;
+}
+
+.testimonial span {
+    display: inline-block;
+    color: #1d4ed8;
+    font-weight: 700;
+}
+
+.proveedores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+}
+
+.proveedor-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.proveedor-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 45px rgba(15, 23, 42, 0.12);
+}
+
+.proveedor-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 18px;
+    border-radius: 18px;
+    background: #f8fafc;
+    padding: 12px;
+}
+
+.proveedor-card h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #0f172a;
+}
+
+.proveedor-card p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.contact-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+}
+
+.contact-card h3 {
+    margin-bottom: 18px;
+    font-size: 22px;
+    color: #0f172a;
+}
+
+.contact-info {
+    display: grid;
+    gap: 16px;
+}
+
+.contact-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.contact-item span {
+    min-width: 46px;
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 18px;
+}
+
+.contact-item strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #0f172a;
+}
+
+.contact-item p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.social-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #1d4ed8;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-2px);
+}
+
+.contact-form {
+    display: grid;
+    gap: 16px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #0f172a;
+    font-size: 15px;
+}
+
+.contact-form button {
+    align-self: flex-start;
+    padding: 14px 26px;
+    border: none;
+    border-radius: 16px;
+    background: #2563eb;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.contact-form button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+}
+
+#contacto iframe {
+    width: 100%;
+    height: 320px;
+    margin-top: 24px;
+    border-radius: 24px;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+    }
+
+    .feature-list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .feature-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes slide {
+    0% {background-image: url('pngtree-cars-displayed-in-bright-auto-dealership-image_17872614.webp');}
+    33% {background-image: url('https://via.placeholder.com/1200x320/2a5298/ffffff');}
+    66% {background-image: url('https://via.placeholder.com/1200x320/3d7bb8/ffffff');}
+}
+
+/* SECCIONES CON FONDO */
+#inicio {
+    background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+                url('pngtree-cars-displayed-in-bright-auto-dealership-image_17872614.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#productos {
+    background: linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
+                url('https://via.placeholder.com/1200x600/0f172a');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#quienes {
+    background: linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
+                url('https://via.placeholder.com/1200x600/1e293b');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#quienes img {
+    display: block;
+    margin: 0 auto 24px;
+    width: 250px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+}
+
+/* LISTA */
+section ul {
+    list-style: none;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+}
+
+section ul li {
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 16px;
+    color: #334155;
+}
+
+section ul li:last-child {
+    border-bottom: none;
+}
+
+/* IFRAME */
+iframe {
+    border-radius: 18px;
+    border: none;
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+    width: 100%;
+    max-width: 600px;
+}
+
+/* FOOTER */
+footer {
+    background: linear-gradient(90deg, #0f172a 0%, #1e293b 100%);
+    color: rgb(74, 72, 170);
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 30px;
+}
+
+footer p {
+    color: #fbbf24;
+    font-weight: 600;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    section {
+        padding: 30px 24px;
+        margin: 24px 16px;
+    }
+
+    .card {
+        width: calc(100% - 40px);
+        margin: 16px auto;
+    }
+
+    nav {
+        gap: 6px;
+    }
+
+    nav a {
+        padding: 10px 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 15px;
+    }
+
+    section h1 {
+        font-size: 32px;
+    }
+
+    section h2 {
+        font-size: 26px;
+    }
+
+    .slider {
+        height: 220px;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<!-- MARQUESINA -->
+<div class="marquesina">
+     0901-26-20334 | Edwin Josue Gabriel Lima Alvarez
+</div>
+
+<!-- MENÚ -->
+<nav aria-label="Menú principal">
+    <a href="#inicio">Inicio</a>
+    <a href="#quienes">Quiénes Somos</a>
+    <a href="#mision">Misión y Visión</a>
+    <a href="#productos">Productos</a>
+    <a href="#proveedores">Proveedores</a>
+    <a href="#clientes">Clientes</a>
+    <a href="#contacto">Contáctenos</a>
+</nav>
+
+<!-- INICIO -->
+<section id="inicio" class="active pngtree-cars-disp">
+    <div class="hero">
+        <div class="hero-text">
+            <span class="eyebrow">Autos premium en Guatemala</span>
+            <h1 class="hero-title">Bienvenido a <span>AutoMax GT</span></h1>
+            <p>Encuentra tu auto ideal con confianza, servicio personalizado y las mejores opciones del mercado automotriz en Guatemala.</p>
+            <div class="hero-buttons">
+                <a href="#productos">Ver productos</a>
+                <a class="secondary" href="#contacto">Contáctenos</a>
+                <a class="secondary" href="#" onclick="cotizarDirecto(event)">Cotiza ya</a>
+            </div>
+            <div class="hero-highlights">
+                <div class="highlight-item">
+                    <strong>500+</strong>
+                    <span>Clientes satisfechos</span>
+                </div>
+                <div class="highlight-item">
+                    <strong>100%</strong>
+                    <span>Autos revisados y certificados</span>
+                </div>
+                <div class="highlight-item">
+                    <strong>24/7</strong>
+                    <span>Atención rápida y personalizada</span>
+                </div>
+            </div>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>Entrega rápida</h3>
+                    <p>Autos disponibles y listos para entrega inmediata.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Financiamiento</h3>
+                    <p>Opciones de crédito flexibles para tu bolsillo.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Garantía</h3>
+                    <p>Soporte y confianza en cada compra.</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-media">
+            <div class="slider" id="heroSlider">
+                <div class="slide active" style="background-image: url('recibiendo su vehivulo.jpg');"></div>
+                <div class="slide" style="background-image: url('consecionario.jpg');"></div>
+                <div class="slide" style="background-image: url('compra.jpg');"></div>
+                <div class="slide" style="background-image: url('imagen completa.jpg');"></div>
+            </div>
+            <div class="slider-dots" id="heroSliderDots"></div>
+        </div>
+    </div>
+</section>
+
+<!-- QUIENES SOMOS -->
+<section id="quienes">
+    <h2>Auto max GT</h2>
+    <img src="unnamed (1).jpg" alt="Alumno">
+    <p>En Auto Max GT somos una empresa dedicada a la venta de vehículos modernos, cómodos y de alta calidad. Nuestro objetivo es brindar a nuestros clientes una experiencia confiable y segura al momento de adquirir el automóvil ideal para sus necesidades.
+
+Nos caracterizamos por ofrecer una atención personalizada, precios accesibles y una gran variedad de vehículos para diferentes gustos y presupuestos. Trabajamos con responsabilidad, honestidad y compromiso para garantizar la satisfacción de cada cliente.
+
+En Auto Max GT buscamos crecer cada día y convertirnos en una empresa reconocida en el mercado automotriz por nuestro excelente servicio y la calidad de nuestros vehículos.</p>
+</section>
+
+<!-- MISIÓN Y VISIÓN -->
+<section id="mision">
+    <h2>Misión</h2>
+    <p>Brindar a nuestros clientes vehículos de alta calidad, modernos y accesibles, ofreciendo un excelente servicio, confianza y atención personalizada para satisfacer sus necesidades de transporte de manera segura y eficiente</p>
+    <h2>Visión</h2>
+    <p>Ser una empresa líder en la venta de vehículos en Guatemala, reconocida por nuestra calidad, innovación, responsabilidad y compromiso con la satisfacción de nuestros clientes, ofreciendo siempre las mejores opciones del mercado automotriz</p>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+    <h2>Nuestros Productos</h2>
+
+    <div class="card">
+        <img src="COR0001a_25_WEB_CROP_Large-Landscape (1).webp">
+        <h3>Toyota Corolla</h3>
+        <p class="product-meta">Año 2023 • 12,000 km • Sedán</p>
+        <p>Q150,000</p>
+        <div class="card-buttons">
+            <button class="comprar">Comprar</button>
+            <button class="cotizar">Cotizar</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="14210fd8-4806-4285-9f67-7d9dac42314e.jpg">
+        <h3>Honda Civic</h3>
+        <p class="product-meta">Año 2022 • 18,500 km • Sedán</p>
+        <p>Q140,000</p>
+        <div class="card-buttons">
+            <button class="comprar">Comprar</button>
+            <button class="cotizar">Cotizar</button>
+        </div>
+    </div>
+    <div class="card">
+        <img src="a3ff1c12-b730-45d0-aa61-79a8daca5b9e.jpg">
+        <h3>Ford Mustang</h3>
+        <p class="product-meta">Año 2021 • 8,900 km • Coupé deportivo</p>
+        <p>Q250,000</p>
+        <div class="card-buttons">
+            <button class="comprar">Comprar</button>
+            <button class="cotizar">Cotizar</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="521b80ae-ec9d-46e7-b73e-caee1c561139.jpg">
+        <h3>Chevrolet Camaro</h3>
+        <p class="product-meta">Año 2020 • 14,200 km • Deportivo</p>
+        <p>Q220,000</p>
+        <div class="card-buttons">
+            <button class="comprar">Comprar</button>
+            <button class="cotizar">Cotizar</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="9173d8cd-d878-471a-adca-337ec66ffde1.jpg">
+        <h3>Nissan Altima</h3>
+        <p class="product-meta">Año 2022 • 21,500 km • Sedán familiar</p>
+        <p>Q130,000</p>
+        <div class="card-buttons">
+            <button class="comprar">Comprar</button>
+            <button class="cotizar">Cotizar</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="6c2da9c0-8c2e-413b-b568-42dec21b4160.jpg">
+        <h3>Mazda CX-5</h3>
+        <p class="product-meta">Año 2023 • 9,700 km • SUV compacto</p>
+        <p>Q180,000</p>
+        <div class="card-buttons">
+            <button class="comprar">Comprar</button>
+            <button class="cotizar">Cotizar</button>
+        </div>
+    </div>
+
+</section>
+
+<!-- PROVEEDORES -->
+<section id="proveedores">
+    <h2>Proveedores confiables</h2>
+    <p>Trabajamos con marcas reconocidas para ofrecerte vehículos de calidad y respaldo total.</p>
+
+    <div class="proveedores-grid">
+        <div class="proveedor-card">
+            <img src="images.png" alt="Toyota Guatemala">
+            <h3>Toyota Guatemala</h3>
+            <p>Distribuidor oficial de modelos Toyota con garantía y servicio técnico certificado.</p>
+        </div>
+        <div class="proveedor-card">
+            <img src="images (1).png" alt="Honda Motors">
+            <h3>Honda Motors</h3>
+            <p>Proveedor de unidades Honda modernas y eficientes, con soporte local garantizado.</p>
+        </div>
+        <div class="proveedor-card">
+            <img src="1618412284429.avif" alt="Ford">
+            <h3>Ford</h3>
+            <p>Vehículos Ford disponibles para todos los gustos: deportivos, familiares y camionetas.</p>
+        </div>
+        <div class="proveedor-card">
+            <img src="images.jpg" alt="Chevrolet">
+            <h3>Chevrolet</h3>
+            <p>Chevrolet con respaldo oficial, garantía de fábrica y servicio técnico disponible en todo Guatemala.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CLIENTES -->
+<section id="clientes">
+    <h2>Clientes satisfechos</h2>
+    <p>Más de 500 compradores ya confiaron en AutoMax GT. Estos son algunos de nuestros clientes y su experiencia con nosotros.</p>
+
+    <div class="clientes-grid">
+        <div class="cliente-card">
+            <h3>Juan Pérez</h3>
+            <p>Compré un Toyota Corolla y el servicio fue excelente. Me ayudaron a elegir el mejor plan de financiamiento.</p>
+        </div>
+        <div class="cliente-card">
+            <h3>María López</h3>
+            <p>Muy buen trato, la entrega fue rápida y el auto estaba en perfectas condiciones. Recomendado al 100%.</p>
+        </div>
+        <div class="cliente-card">
+            <h3>Carlos Gómez</h3>
+            <p>La atención personalizada y la confianza en el proceso hicieron que comprar fuera muy fácil.</p>
+        </div>
+    </div>
+
+    <div class="testimonial">
+        <p>“AutoMax GT me ayudó a encontrar un auto ideal para mi familia y gestionaron todo el papeleo sin problema. La experiencia fue profesional y agradable.”</p>
+        <span>- Ana Morales, Cliente feliz</span>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+    <h2>Contáctenos</h2>
+    <p>Estamos listos para ayudarte a elegir el mejor auto. Envía tu pregunta y te responderemos lo antes posible.</p>
+
+    <div class="contact-grid">
+        <div class="contact-card">
+            <h3>Estamos para ayudarte</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📞</span>
+                    <div>
+                        <strong>Teléfono</strong>
+                        <p>+502 5457-0264</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span>📧</span>
+                    <div>
+                        <strong>Correo</strong>
+                        <p>Automaxgt@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <div>
+                        <strong>Dirección</strong>
+                        <p>Zona 10, Ciudad de Guatemala</p>
+                    </div>
+                </div>
+            </div>
+            <div class="social-links" style="margin-top: 24px;">
+                <a class="social-link" href="https://wa.me/50254570264?text=Hola%20AutoMax%20GT" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                <a class="social-link" href="https://www.facebook.com/AutoMaxGT" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <h3>Envía un mensaje</h3>
+            <form id="contactForm" class="contact-form">
+                <input type="text" placeholder="Nombre" required />
+                <input type="email" placeholder="Correo electrónico" required />
+                <textarea rows="5" placeholder="Tu mensaje" required></textarea>
+                <button type="submit">Enviar mensaje</button>
+            </form>
+        </div>
+    </div>
+
+    <iframe src="https://maps.google.com/maps?q=Zona+10+Ciudad+de+Guatemala&z=15&output=embed" loading="lazy" title="Ubicación AutoMax GT"></iframe>
+    <div class="map-actions" style="margin-top: 18px; text-align: center;">
+        <a class="social-link" href="https://www.google.com/maps/dir/?api=1&destination=Zona+10+Ciudad+de+Guatemala" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>"Y conoceréis la verdad y la verdad os hará libres" - UMG</p>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+function mostrar(seccion) {
+    const nombre = seccion || 'inicio';
+    const secciones = document.querySelectorAll('section');
+    secciones.forEach(s => s.classList.remove('active'));
+    const elemento = document.getElementById(nombre);
+    if (elemento) {
+        elemento.classList.add('active');
+        history.replaceState(null, '', '#' + nombre);
+    }
+}
+
+function guardarHash() {
+    const hash = window.location.hash.replace('#', '');
+    mostrar(hash || 'inicio');
+}
+
+window.addEventListener('load', guardarHash);
+window.addEventListener('hashchange', guardarHash);
+
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const nombre = this.querySelector('input[type=text]').value.trim();
+    const correo = this.querySelector('input[type=email]').value.trim();
+    const mensaje = this.querySelector('textarea').value.trim();
+
+    if (!nombre || !correo || !mensaje) {
+        alert('Por favor completa todos los campos antes de enviar.');
+        return;
+    }
+
+    alert('¡Gracias, ' + nombre + '! Tu mensaje ha sido enviado correctamente.');
+    this.reset();
+});
+
+function obtenerNombreProducto(boton) {
+    const card = boton.closest('.card');
+    return card ? card.querySelector('h3')?.textContent.trim() : 'este producto';
+}
+
+function prepararFormulario(producto, tipo) {
+    mostrar('contacto');
+    const formulario = document.getElementById('contactForm');
+    if (!formulario) return;
+    const mensaje = formulario.querySelector('textarea');
+    if (mensaje) {
+        mensaje.value = tipo === 'comprar'
+            ? 'Estoy interesado en comprar ' + producto + '. Por favor contáctenme para más detalles.'
+            : 'Quisiera cotizar ' + producto + '. Por favor envíenme información de precios y opciones.';
+    }
+    const nombreInput = formulario.querySelector('input[type=text]');
+    if (nombreInput) {
+        nombreInput.focus();
+    }
+}
+
+function cotizarDirecto(event) {
+    event.preventDefault();
+    prepararFormulario('un auto', 'cotizar');
+}
+
+document.querySelectorAll('.comprar').forEach(boton => {
+    boton.addEventListener('click', function() {
+        const producto = obtenerNombreProducto(this);
+        prepararFormulario(producto, 'comprar');
+    });
+});
+
+document.querySelectorAll('.cotizar').forEach(boton => {
+    boton.addEventListener('click', function() {
+        const producto = obtenerNombreProducto(this);
+        prepararFormulario(producto, 'cotizar');
+    });
+});
+
+function setupHeroSlider() {
+    const slides = document.querySelectorAll('#heroSlider .slide');
+    const dotsContainer = document.getElementById('heroSliderDots');
+    if (!slides.length || !dotsContainer) return;
+
+    let current = 0;
+    const dots = [];
+
+    slides.forEach((slide, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'slider-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            slides[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = index;
+            slides[current].classList.add('active');
+            dots[current].classList.add('active');
+        });
+        dotsContainer.appendChild(dot);
+        dots.push(dot);
+    });
+
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+    }, 6000);
+}
+
+window.addEventListener('load', setupHeroSlider);
+</script>
+
+</body>/html>
